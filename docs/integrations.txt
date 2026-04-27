@@ -1,0 +1,39 @@
+Journey 1 — Org Admin — Connection Management
+US-01 — View all connections
+As an org admin, I want to see all existing connections in one place with their health status, which departments are using them, and any warnings like expiring tokens — so I can manage them easily.
+US-02 — Browse provider catalog
+As an org admin, I want to see a catalog of available providers — Salesforce, SAP, Zoho etc. — so I can select the right one to create a new connection.
+US-03 — Create connection with credentials
+As an org admin, I want to enter credentials for a selected provider — API key, OAuth, basic auth, mTLS — so the platform can establish a connection to that system.
+US-04 — Define connector for API-only systems
+As an org admin, when the provider does not support MCP or OpenAPI, I want to either upload an OpenAPI spec or manually define tools — with tool name, description, input schema, JSON template, and auth method — so the platform can treat it like any other integration.
+US-05 — Auto-discover tools
+As an org admin, after credentials are entered, I want the platform to automatically discover all available tools from MCP or OpenAPI — so I don't have to manually list APIs.
+US-06 — Configure tool governance
+As an org admin, I want to review the auto-discovered tool list and mark specific tools as restricted, audited, or HITL-required — with optional threshold rules like amounts above ₹1,00,000 — so governance rules travel with the tool everywhere it is used.
+US-07 — Test connection
+As an org admin, I want to do a simple health check ping after setting up a connection — so I can confirm the credentials are valid and the system is reachable.
+US-08 — Assign connection to departments
+As an org admin, I want to assign a connection to one or more departments — so dept admins can then use it within their projects.
+
+Journey 2 — Dept Admin — Binding & Scoping
+US-09 — View available connections
+As a dept admin, I want to see all connections that the org admin has assigned to my department — so I know what integrations are available to me.
+US-10 — Bind connection to a project with tool scoping
+As a dept admin, I want to assign a connection to a specific project and select which tools that project can use — within what the org admin has permitted — so each project only has access to what it needs.
+US-11 — Test specific tools
+As a dept admin, I want to select a specific tool, provide a sample JSON input, and see the real API response — so I can validate the tool works correctly before builders use it.
+
+Journey 3 — Builder — Using Tools in Agent
+US-12 — View available tools in agent builder
+As a builder, I want to see all tools available to my project in the agent builder right rail — grouped by category: integrations, knowledge, platform native, AI/model, utility — so I can find and enable what I need.
+US-13 — Configure tool parameters
+As a builder, I want to configure each tool's input parameters by selecting a source — agent state variable, fixed value, workflow input, or user input — so the platform constructs the correct payload at runtime without me writing JSON manually.
+US-14 — Handle complex JSON with code transform
+As a builder, when a tool requires a complex or nested JSON payload, I want to add a Code/Transform step before the tool call where I can write a Python function to construct the payload — so I can handle edge cases beyond simple parameter mapping.
+US-15 — Request access to a restricted tool
+As a builder, when I see a tool that is greyed out as org-locked, dept-disabled, or requires access — I want to raise an access request directly from the agent builder — so the right admin is notified and the request is tracked on the platform.
+
+Journey 4 — Runtime Enforcement
+US-16 — Enforce tool governance at runtime
+As a platform, when an agent calls a tool, I want to automatically check the binding allowlist, org-level HITL rules, and threshold-based rules in order — before the actual API call is made — so governance is enforced consistently regardless of what the agent's prompt says.
